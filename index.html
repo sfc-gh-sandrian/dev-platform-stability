@@ -1745,6 +1745,7 @@ const componentHealth = [
     "component": "SnowGit",
     "health": "yellow",
     "trend": "improving",
+    "trendReason": "3 incidents in earlier weeks, 0 in recent weeks; SLO alerts declining.",
     "detail": "14 open, 21 closed/done. Open by status: 13 Open, 1 Backlog. By priority: 14 High. By type: 13 Auto-incident, 1 Bug. Top open: SNOW-3360838 (Open) | SNOW-3360753 (Open) | SNOW-3356537 (Open) | SNOW-3355647 (Open) | SNOW-3350176 (Open)"
   },
   {
@@ -1759,6 +1760,7 @@ const componentHealth = [
     "component": "DCM",
     "health": "red",
     "trend": "degrading",
+    "trendReason": "High bug count with many open Critical/Highest; volume increasing week over week.",
     "detail": "29 open, 17 closed/done. Open by status: 13 Backlog, 7 Ready for Deployment, 5 Open, 3 IN PROGRESS, 1 In Review. By priority: 15 High, 12 Critical, 2 Highest. By type: 20 Bug, 9 Auto-incident. Top open: SNOW-3371939 (IN PROGRESS) | SNOW-3371938 (IN PROGRESS) | SNOW-3370114 (Open) | SNOW-3363417 (Open) | SNOW-3362315 (Open)"
   },
   {
@@ -1773,6 +1775,7 @@ const componentHealth = [
     "component": "Drivers",
     "health": "red",
     "trend": "degrading",
+    "trendReason": "5 PROD incidents, 3 active support cases; Sev1 Python HTTP400 waiting, critical Go ADBC in progress.",
     "detail": "17 open, 19 closed/done. Open by status: 10 Backlog, 2 Open, 2 Ready for Deployment, 1 IN PROGRESS, 1 WAITING FOR SUPPORT, 1 In Review. By priority: 11 High, 5 Critical, 1 PatchCritical. By type: 12 Bug, 3 Support, 2 Auto-incident. Top open: SNOW-3379021 (Backlog) | SNOW-3378171 (IN PROGRESS) | SNOW-3377229 (Backlog) | SNOW-3372661 (Backlog) | SNOW-3365508 (Backlog)"
   },
   {
@@ -1787,6 +1790,7 @@ const componentHealth = [
     "component": "SnowCLI",
     "health": "yellow",
     "trend": "stable",
+    "trendReason": "Low and steady issue count; no incidents or support cases.",
     "detail": "4 open, 1 closed/done. Open by status: 2 Backlog, 1 IN PROGRESS, 1 Open. By priority: 4 High. By type: 3 Bug, 1 Auto-incident. Top open: SNOW-3349955 (Backlog) | SNOW-3332553 (IN PROGRESS) | SNOW-3317601 (Backlog) | SNOW-3316060 (Open)"
   },
   {
@@ -1801,6 +1805,7 @@ const componentHealth = [
     "component": "SnowAPIs / SQL API",
     "health": "yellow",
     "trend": "stable",
+    "trendReason": "Low volume; 1 open support case, no incidents.",
     "detail": "1 open, 1 closed/done. Open by status: 1 Backlog. By priority: 1 High. By type: 1 Support. Top open: SNOW-3364213 (Backlog)"
   },
   {
@@ -1815,6 +1820,7 @@ const componentHealth = [
     "component": "Terraform Provider",
     "health": "green",
     "trend": "stable",
+    "trendReason": "Zero issues across the entire reporting period.",
     "detail": "No incidents, bugs, or support cases in the reporting period."
   },
   {
@@ -1829,6 +1835,7 @@ const componentHealth = [
     "component": "SQL Alchemy",
     "health": "green",
     "trend": "stable",
+    "trendReason": "Zero issues across the entire reporting period.",
     "detail": "No incidents, bugs, or support cases in the reporting period."
   }
 ];
@@ -2081,7 +2088,7 @@ function renderComponentCards() {
       </div>
       <div class="comp-sparkline"><canvas id="spark-${i}" width="280" height="45"></canvas></div>
       <div class="expand-hint">Click to expand details</div>
-      <div class="comp-details">${c.detail}</div>
+      <div class="comp-details"><strong>Trend reasoning:</strong> ${c.trendReason}<br><br>${c.detail}</div>
     </div>
   `).join('');
   // Render sparklines after DOM is populated
