@@ -116,12 +116,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .comp-card.expanded .comp-details { display:block; }
 .comp-card .expand-hint { font-size:0.7rem; color:var(--text-muted); margin-top:8px; }
 
-/* Action Items */
-.action-list { display:flex; flex-direction:column; gap:12px; margin-bottom:28px; }
-.action-item { background:var(--card); border:1px solid var(--card-border); border-radius:12px; padding:16px 20px; display:flex; gap:16px; align-items:flex-start; }
-.action-item .risk-badge { flex-shrink:0; margin-top:2px; }
-.action-item .action-text { font-size:0.85rem; }
-.action-item .action-component { font-size:0.75rem; color:var(--text-dim); margin-top:4px; }
 .section-title { font-size:1.1rem; font-weight:600; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--card-border); }
 
 /* Footer */
@@ -135,7 +129,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 @media print {
   body { background:#fff; color:#222; }
   .toggle-row, .filters-row, .expand-hint { display:none; }
-  .chart-card, .kpi-card, .comp-card, .table-section, .action-item { border:1px solid #ddd; background:#fff; break-inside:avoid; }
+  .chart-card, .kpi-card, .comp-card, .table-section { border:1px solid #ddd; background:#fff; break-inside:avoid; }
   .data-table th, .data-table td { color:#222; }
   .badge { border:1px solid #ccc; }
 }
@@ -191,10 +185,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <!-- Component Health -->
 <h2 class="section-title" style="margin-top:28px;">Component Health</h2>
 <div class="component-grid" id="componentGrid"></div>
-
-<!-- Action Items -->
-<h2 class="section-title">Action Items &amp; Risks</h2>
-<div class="action-list" id="actionList"></div>
 
 <div class="footer">Generated on April 14, 2026 at 18:46 · Data sourced from Jira REST API (SNOW + PROD projects)</div>
 </div>
@@ -1842,29 +1832,6 @@ const componentHealth = [
   }
 ];
 
-const actionItems = [
-  {
-    "component": "DCM",
-    "risk": "high",
-    "text": "29 open bugs/auto-incidents on 10.13/10.14. Includes Blocker + Highest. Active auto-incidents (Jinja2, grant revoke, deployment history)."
-  },
-  {
-    "component": "SnowGit",
-    "risk": "medium",
-    "text": "All 3 PROD incidents now Closed. 11 open SLO alert bugs remain. 6+ open SNOW auto-incidents."
-  },
-  {
-    "component": "Drivers",
-    "risk": "high",
-    "text": "17 open bugs/support cases. Sev1 Python HTTP400 (waiting). Critical Go ADBC support case (in progress)."
-  },
-  {
-    "component": "Alerting",
-    "risk": "medium",
-    "text": "Real-time alerting incomplete for Drivers, SnowCLI, SQL Alchemy, Terraform Provider."
-  }
-];
-
 // ===== STATE =====
 let currentRange = '30d';
 let currentTab = 'incidents';
@@ -2087,16 +2054,6 @@ function renderComponentCards() {
   `).join('');
 }
 
-// ===== ACTION ITEMS =====
-function renderActionItems() {
-  document.getElementById('actionList').innerHTML = actionItems.map(a => `
-    <div class="action-item">
-      <span class="badge ${a.risk==='high'?'high-risk':a.risk==='low'?'low-risk':'medium-risk'} risk-badge">${a.risk.toUpperCase()}</span>
-      <div><div class="action-text">${a.text}</div><div class="action-component">${a.component}</div></div>
-    </div>
-  `).join('');
-}
-
 // ===== GLOBAL ACTIONS =====
 function setRange(range) {
   currentRange = range;
@@ -2122,7 +2079,6 @@ function renderAll() {
   renderFilters();
   renderTable();
   renderComponentCards();
-  renderActionItems();
 }
 
 // ===== INIT =====
