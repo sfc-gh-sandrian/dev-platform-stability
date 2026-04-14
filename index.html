@@ -115,6 +115,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .comp-details { display:none; margin-top:12px; padding-top:12px; border-top:1px solid var(--card-border); font-size:0.8rem; color:var(--text-dim); line-height:1.8; }
 .comp-card.expanded .comp-details { display:block; }
 .comp-card .expand-hint { font-size:0.7rem; color:var(--text-muted); margin-top:8px; }
+.comp-sparkline { height:45px; margin-top:10px; position:relative; }
 
 .section-title { font-size:1.1rem; font-weight:600; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--card-border); }
 
@@ -2033,6 +2034,36 @@ function sortTable(col) {
 }
 
 // ===== COMPONENT CARDS =====
+function computeComponentTrend(compName) {
+  const weeks = weeklyTrend.map(w => w.week);
+  const allTickets = [
+    ...filterByRange(prodIncidents),
+    ...filterByRange(prodSloAlerts),
+    ...filterByRange(sevBugs),
+    ...filterByRange(supportCases)
+  ].filter(t => t.component === compName);
+  // Build week boundaries from weeklyTrend labels (e.g. "Mar 15-20", "Apr 4-10")
+  // Assign each ticket to a week bucket by created date
+  const weekBuckets = weeks.map(() => 0);
+  const year = 2026;
+  const monthMap = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  // Parse week ranges to get start dates
+  const weekStarts = [];
+  for (const w of weeks) {
+    const m = w.match(/^(\w+)\s+(\d+)/);
+    if (m) weekStarts.push(new Date(year, monthMap[m[1]], parseInt(m[2])));
+    else weekStarts.push(new Date(0));
+  }
+  for (const t of allTickets) {
+    const d = new Date(t.created);
+    let assigned = false;
+    for (let i = weekStarts.length - 1; i >= 0; i--) {
+      if (d >= weekStarts[i]) { weekBuckets[i]++; assigned = true; break; }
+    }
+    if (!assigned && weekStarts.length) weekBuckets[0]++;
+  }
+  return weekBuckets;
+}
 function renderComponentCards() {
   const key14 = currentRange === '14d';
   document.getElementById('componentGrid').innerHTML = componentHealth.map((c,i) => `
@@ -2048,10 +2079,64 @@ function renderComponentCards() {
         <span>SNOW Bugs: <strong>${key14?c.sev12_14d:c.sev12_30d}</strong></span>
         <span>Support: <strong>${key14?c.support14d:c.support30d}</strong></span>
       </div>
+      <div class="comp-sparkline"><canvas id="spark-${i}" width="280" height="45"></canvas></div>
       <div class="expand-hint">Click to expand details</div>
       <div class="comp-details">${c.detail}</div>
     </div>
   `).join('');
+  // Render sparklines after DOM is populated
+  renderSparklines();
+}
+let sparkInstances = [];
+function renderSparklines() {
+  sparkInstances.forEach(c => c.destroy());
+  sparkInstances = [];
+  const trendColors = {
+    degrading: { border:'#ef4444', bg:'rgba(239,68,68,0.15)' },
+    improving: { border:'#22c55e', bg:'rgba(34,197,94,0.15)' },
+    stable: { border:'#64748b', bg:'rgba(100,116,139,0.1)' },
+    'stable-elevated': { border:'#f59e0b', bg:'rgba(245,158,11,0.15)' }
+  };
+  const data = currentRange === '14d' ? weeklyTrend.slice(-2) : weeklyTrend;
+  const labels = data.map(d => d.week);
+  componentHealth.forEach((c, i) => {
+    const canvas = document.getElementById('spark-' + i);
+    if (!canvas) return;
+    const values = computeComponentTrend(c.component);
+    const sliced = currentRange === '14d' ? values.slice(-2) : values;
+    const colors = trendColors[c.trend] || trendColors.stable;
+    const chart = new Chart(canvas.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: sliced,
+          borderColor: colors.border,
+          backgroundColor: colors.bg,
+          fill: true,
+          tension: 0.3,
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: colors.border,
+          pointBorderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: {
+          callbacks: { title: ctx => ctx[0].label, label: ctx => ctx.parsed.y + ' issues' },
+          bodyFont: { size: 11 }, titleFont: { size: 11 }, padding: 6
+        }},
+        scales: {
+          x: { display: false },
+          y: { display: false, beginAtZero: true }
+        },
+        layout: { padding: { top: 2, bottom: 2, left: 0, right: 0 } }
+      }
+    });
+    sparkInstances.push(chart);
+  });
 }
 
 // ===== GLOBAL ACTIONS =====
