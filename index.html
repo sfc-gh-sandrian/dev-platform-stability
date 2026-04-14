@@ -178,7 +178,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('incidents')">PROD Incidents (8)</button>
-    <button class="tab-btn" onclick="switchTab('sloalerts')">SLO Alerts / Bugs (19)</button>
+    <button class="tab-btn" onclick="switchTab('sloalerts')">SLO Alerts / Bugs (18)</button>
     <button class="tab-btn" onclick="switchTab('sevbugs')">Sev1/Sev2 Bugs</button>
     <button class="tab-btn" onclick="switchTab('support')">Support Cases</button>
   </div>
@@ -196,19 +196,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <h2 class="section-title">Action Items &amp; Risks</h2>
 <div class="action-list" id="actionList"></div>
 
-<div class="footer">Generated on April 13, 2026 · Data sourced from Jira (SNOW + PROD projects), Slack incident channels, Dev Platform Stability Review</div>
+<div class="footer">Generated on April 14, 2026 · Data sourced from Jira REST API (SNOW + PROD projects)</div>
 </div>
 
 <script>
-// ===== DATA (sourced from Jira REST API, April 13 2026) =====
+// ===== DATA (sourced from Jira REST API, April 14 2026) =====
 // Developer Platform components: Drivers, SnowCLI, SnowGit, DCM, SnowAPIs, Terraform Provider, SQL Alchemy
 // JQL: project = "Production Issues" AND "Area[Dropdown]" = "Developer Platform" AND created >= -30d
 
 const prodIncidents = [
-  // === INCIDENTS (issuetype=Incident) — 8 total: 3 SnowGit open, 5 Drivers closed ===
-  {ticket:"PROD-506217",component:"SnowGit",priority:"Medium",summary:"[HIGH] snowgit_clone_repo SLI fast burn rate",status:"Not Started",created:"2026-03-26",period:"30d",context:false,issueType:"Incident"},
-  {ticket:"PROD-505046",component:"SnowGit",priority:"Medium",summary:"[HIGH] snowgit_clone_repo SLI fast burn rate",status:"Not Started",created:"2026-03-24",period:"30d",context:false,issueType:"Incident"},
-  {ticket:"PROD-503601",component:"SnowGit",priority:"Medium",summary:"[HIGH] snowgit_list_branches SLI fast burn rate",status:"Not Started",created:"2026-03-20",period:"30d",context:false,issueType:"Incident"},
+  // === INCIDENTS (issuetype=Incident) — 8 total: 0 open, 8 closed (all resolved) ===
+  {ticket:"PROD-506217",component:"SnowGit",priority:"Medium",summary:"[HIGH] snowgit_clone_repo SLI fast burn rate",status:"Closed",created:"2026-03-26",period:"30d",context:true,issueType:"Incident"},
+  {ticket:"PROD-505046",component:"SnowGit",priority:"Medium",summary:"[HIGH] snowgit_clone_repo SLI fast burn rate",status:"Closed",created:"2026-03-24",period:"30d",context:true,issueType:"Incident"},
+  {ticket:"PROD-503601",component:"SnowGit",priority:"Medium",summary:"[HIGH] snowgit_list_branches SLI fast burn rate",status:"Closed",created:"2026-03-20",period:"30d",context:true,issueType:"Incident"},
   {ticket:"PROD-508339",component:"Drivers",priority:"Medium",summary:"[HIGH] SnowflakeMessageWriter spike",status:"Closed",created:"2026-04-01",period:"14d",context:true,issueType:"Incident"},
   {ticket:"PROD-507967",component:"Drivers",priority:"Medium",summary:"[HIGH] SnowflakeMessageWriter spike",status:"Closed",created:"2026-03-31",period:"14d",context:true,issueType:"Incident"},
   {ticket:"PROD-507833",component:"Drivers",priority:"Medium",summary:"[HIGH] SnowflakeMessageWriter spike",status:"Closed",created:"2026-03-31",period:"14d",context:true,issueType:"Incident"},
@@ -217,7 +217,7 @@ const prodIncidents = [
 ];
 
 const prodSloAlerts = [
-  // === BUGS / SLO ALERTS (issuetype=Bug) — 19 total: 12 open, 7 closed/dup ===
+  // === BUGS / SLO ALERTS (issuetype=Bug) — 18 total: 11 open, 7 closed/dup ===
   // Open
   {ticket:"PROD-513468",component:"SnowGit",priority:"Medium",summary:"[MEDIUM] snowgit_clone_repo SLI slow burn rate",status:"Not Started",created:"2026-04-13",period:"14d",context:false,issueType:"Bug"},
   {ticket:"PROD-512784",component:"SnowGit",priority:"Medium",summary:"All instances in DS cluster elevated disk usage (DS_DEFAULT)",status:"Not Started",created:"2026-04-10",period:"14d",context:false,issueType:"Bug"},
@@ -237,16 +237,14 @@ const prodSloAlerts = [
   {ticket:"PROD-503316",component:"SnowGit",priority:"Medium",summary:"DS operation queue alert stuck in TEST (Duplicate)",status:"Closed",created:"2026-03-19",period:"30d",context:true,issueType:"Bug"},
   {ticket:"PROD-503302",component:"SnowGit",priority:"Medium",summary:"Commit push :: operation timeout stuck in TEST (Duplicate)",status:"Closed",created:"2026-03-19",period:"30d",context:true,issueType:"Bug"},
   {ticket:"PROD-502292",component:"SnowGit",priority:"Medium",summary:"snowgit_commit_and_push SLI slow burn rate (Duplicate)",status:"Closed",created:"2026-03-16",period:"30d",context:true,issueType:"Bug"},
-  {ticket:"PROD-502144",component:"SnowGit",priority:"Medium",summary:"List files :: operation timeout stuck in TEST (Duplicate)",status:"Closed",created:"2026-03-16",period:"30d",context:true,issueType:"Bug"},
-  {ticket:"PROD-502021",component:"SnowGit",priority:"Medium",summary:"List files :: operation timeout stuck in TEST (Duplicate)",status:"Closed",created:"2026-03-14",period:"30d",context:true,issueType:"Bug"}
+  {ticket:"PROD-502144",component:"SnowGit",priority:"Medium",summary:"List files :: operation timeout stuck in TEST (Duplicate)",status:"Closed",created:"2026-03-16",period:"30d",context:true,issueType:"Bug"}
 ];
 
 // SNOW project bugs/support/auto-incidents (priority >= High, last 30d)
 const sevBugs = [
   // DCM — open
-  {ticket:"SNOW-3371716",component:"DCM",severity:"Critical",type:"Bug",summary:"[10.14.10] TestExecuteFromFile failure",status:"In Progress",created:"2026-04-13",period:"14d",context:false},
-  {ticket:"SNOW-3362524",component:"DCM",severity:"Highest",type:"Bug",summary:"[10.14.10] AuthenticationPolicyProjectExecution failure",status:"Ready for Deploy",created:"2026-04-10",period:"14d",context:false},
-  {ticket:"SNOW-3358953",component:"DCM",severity:"Blocker",type:"Bug",summary:"[10.14.10] test_project_analyze_with_shares failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
+  {ticket:"SNOW-3376470",component:"DCM",severity:"Blocker",type:"Bug",summary:"[10.14.10] test_create_or_alter_schema failure",status:"Backlog",created:"2026-04-13",period:"14d",context:false},
+  {ticket:"SNOW-3358953",component:"DCM",severity:"High",type:"Bug",summary:"[10.14.10] test_project_analyze_with_shares failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
   {ticket:"SNOW-3359210",component:"DCM",severity:"Highest",type:"Bug",summary:"[10.14.10] test_project_analyze_with_shares failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
   {ticket:"SNOW-3363417",component:"DCM",severity:"Critical",type:"Auto-incident",summary:"DcmProjectDeploymentHistoryDAO failed to find record",status:"Open",created:"2026-04-10",period:"14d",context:false},
   {ticket:"SNOW-3370114",component:"DCM",severity:"High",type:"Auto-incident",summary:"Jinja2RunnerImpl::run() failure",status:"Open",created:"2026-04-12",period:"14d",context:false},
@@ -256,7 +254,18 @@ const sevBugs = [
   {ticket:"SNOW-3350848",component:"DCM",severity:"Critical",type:"Bug",summary:"[10.13.100] DmfAssociation test failure",status:"Ready for Deploy",created:"2026-04-08",period:"14d",context:false},
   {ticket:"SNOW-3346861",component:"DCM",severity:"High",type:"Auto-incident",summary:"V2QueryCoordinator NullPointerException",status:"Open",created:"2026-04-07",period:"14d",context:false},
   {ticket:"SNOW-3356484",component:"DCM",severity:"High",type:"Auto-incident",summary:"ParallelizableJinjaFilesIO download failed",status:"Open",created:"2026-04-09",period:"14d",context:false},
+  {ticket:"SNOW-3362523",component:"DCM",severity:"Critical",type:"Bug",summary:"[10.14.10] StateBasedChangeset test failure",status:"Backlog",created:"2026-04-10",period:"14d",context:false},
+  {ticket:"SNOW-3359056",component:"DCM",severity:"Critical",type:"Bug",summary:"[10.14.10] test_project_analyze failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
+  {ticket:"SNOW-3359007",component:"DCM",severity:"Critical",type:"Bug",summary:"[10.14.10] test_project_analyze_with_shares failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
+  {ticket:"SNOW-3371939",component:"DCM",severity:"High",type:"Bug",summary:"[10.14.10] ProjectAnalyzerErrors test failure",status:"Backlog",created:"2026-04-13",period:"14d",context:false},
+  {ticket:"SNOW-3371938",component:"DCM",severity:"High",type:"Bug",summary:"[10.14.10] ProjectAnalyzerErrors test failure",status:"Backlog",created:"2026-04-13",period:"14d",context:false},
+  {ticket:"SNOW-3358215",component:"DCM",severity:"High",type:"Bug",summary:"[10.13.100] test_project_analyze_with_shares failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
+  {ticket:"SNOW-3358209",component:"DCM",severity:"High",type:"Bug",summary:"[10.13.100] test_project_analyze_with_shares failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
+  {ticket:"SNOW-3358182",component:"DCM",severity:"High",type:"Bug",summary:"[10.13.100] test_project_analyze failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
+  {ticket:"SNOW-3358165",component:"DCM",severity:"High",type:"Bug",summary:"[10.13.100] test_project_analyze_with_shares failure",status:"Backlog",created:"2026-04-09",period:"14d",context:false},
   // DCM — closed/done
+  {ticket:"SNOW-3371716",component:"DCM",severity:"High",type:"Bug",summary:"[10.14.10] TestExecuteFromFile failure",status:"Done",created:"2026-04-13",period:"14d",context:true},
+  {ticket:"SNOW-3362524",component:"DCM",severity:"Highest",type:"Bug",summary:"[10.14.10] AuthenticationPolicyProjectExecution failure",status:"Done",created:"2026-04-10",period:"14d",context:true},
   {ticket:"SNOW-3353082",component:"DCM",severity:"High",type:"Support",summary:"GRANT OWNERSHIP fails with dependent grants",status:"Done",created:"2026-04-08",period:"14d",context:true},
   {ticket:"SNOW-3361374",component:"DCM",severity:"Critical",type:"Bug",summary:"[10.14.10] AutoSuspendResumeTasks test failure",status:"Done",created:"2026-04-10",period:"14d",context:true},
   {ticket:"SNOW-3359302",component:"DCM",severity:"Critical",type:"Bug",summary:"[10.14.10] DmfAssociation test failure",status:"Done",created:"2026-04-09",period:"14d",context:true},
@@ -274,6 +283,8 @@ const sevBugs = [
   {ticket:"SNOW-3350176",component:"SnowGit",severity:"High",type:"Auto-incident",summary:"updateRepositoryVersionId versionId mismatch",status:"Open",created:"2026-04-08",period:"14d",context:false},
   {ticket:"SNOW-3350173",component:"SnowGit",severity:"High",type:"Auto-incident",summary:"updateFdbBackupPointer failed",status:"Open",created:"2026-04-08",period:"14d",context:false},
   // Drivers — open
+  {ticket:"SNOW-3378171",component:"Drivers — Go",severity:"Critical",type:"Support",summary:"PowerBi ADBC Go — errors executing SQL Stored Procedure",status:"In Progress",created:"2026-04-14",period:"14d",context:false},
+  {ticket:"SNOW-3377229",component:"Drivers — Go",severity:"High",type:"Bug",summary:"PERF REGRESSION: 12.81% CPU in testsFetchStringOn100MRowArrow",status:"Backlog",created:"2026-04-13",period:"14d",context:false},
   {ticket:"SNOW-3372661",component:"Drivers — .NET",severity:"High",type:"Bug",summary:"PERF REGRESSION: 55% memory in DOTNET_PERF_TESTS",status:"Backlog",created:"2026-04-13",period:"14d",context:false},
   {ticket:"SNOW-3365508",component:"Drivers — PHP",severity:"Critical",type:"Bug",summary:"MakeBenchmark Scheduler Failed PHP_YCSB_PREPROD6",status:"Backlog",created:"2026-04-11",period:"14d",context:false},
   {ticket:"SNOW-3362911",component:"Drivers — Client Backend",severity:"High",type:"Auto-incident",summary:"SIGSEGV in ArrowStreamWriter::initSchemaObjectAndColumnWriter",status:"Open",created:"2026-04-10",period:"14d",context:false},
@@ -284,6 +295,7 @@ const sevBugs = [
   {ticket:"SNOW-3355375",component:"Drivers — JDBC",severity:"Critical",type:"Auto-incident",summary:"V2QueryCoordinator SQLCompilationException",status:"Done",created:"2026-04-09",period:"14d",context:true},
   {ticket:"SNOW-3371234",component:"Drivers — Go",severity:"High",type:"Bug",summary:"PERF REGRESSION: 322% memory in FetchLineitem50MRow",status:"Done",created:"2026-04-12",period:"14d",context:true},
   {ticket:"SNOW-3353188",component:"Drivers — ODBC",severity:"High",type:"Bug",summary:"BenchAlert Failed ODBC_PERF_TESTS",status:"Done",created:"2026-04-08",period:"14d",context:true},
+  {ticket:"SNOW-3350425",component:"Drivers — PHP",severity:"Critical",type:"Bug",summary:"MakeBenchmark Scheduler Failed PHP_YCSB_PREPROD6",status:"Done",created:"2026-04-08",period:"14d",context:true},
   // SnowCLI
   {ticket:"SNOW-3349955",component:"SnowCLI",severity:"High",type:"Bug",summary:"CLI rejects empty-string passphrase for encrypted PKCS8 key",status:"Backlog",created:"2026-04-08",period:"14d",context:false},
   // SQL API
@@ -293,6 +305,7 @@ const sevBugs = [
 ];
 
 const supportCases = [
+  {ticket:"SNOW-3378171",component:"Drivers — Go",severity:"Critical",sfCase:"Customer",summary:"PowerBi ADBC Go — errors executing SQL Stored Procedure",status:"In Progress",created:"2026-04-14",period:"14d",context:false},
   {ticket:"SNOW-3342254",component:"Drivers — Python",severity:"PatchCritical",sfCase:"Customer",summary:"HTTP400/RequestTimeout on large file PUT to S3 stage",status:"Waiting for Support",created:"2026-04-06",period:"14d",context:false},
   {ticket:"SNOW-3364213",component:"SQL API",severity:"High",sfCase:"Customer",summary:"STATEMENT_TIMEOUT_IN_SECONDS not enforced via REST API",status:"Backlog",created:"2026-04-10",period:"14d",context:false},
   {ticket:"SNOW-3353082",component:"DCM",severity:"High",sfCase:"Customer",summary:"GRANT OWNERSHIP fails with dependent grants",status:"Done",created:"2026-04-08",period:"14d",context:true}
@@ -303,13 +316,13 @@ const weeklyTrend = [
   {week:"Mar 21–27",incidents:4,sloAlerts:5,sevBugs:0,supportCases:0,label:"SnowGit clone_repo + Drivers MessageWriter"},
   {week:"Mar 28–Apr 3",incidents:3,sloAlerts:6,sevBugs:0,supportCases:0,label:"SnowGit fetch_repo + Drivers spikes"},
   {week:"Apr 4–10",incidents:0,sloAlerts:1,sevBugs:28,supportCases:3,label:"DCM test failure wave"},
-  {week:"Apr 11–13",incidents:0,sloAlerts:1,sevBugs:10,supportCases:0,label:"DCM 10.14.10 + .NET perf regression"}
+  {week:"Apr 11–14",incidents:0,sloAlerts:2,sevBugs:13,supportCases:1,label:"DCM 10.14.10 + Go Driver support + .NET regression"}
 ];
 
 const componentHealth = [
-  {component:"SnowGit",incidents30d:3,sloAlerts30d:19,sev12_30d:6,support30d:0,incidents14d:0,sloAlerts14d:8,sev12_14d:6,support14d:0,health:"red",trend:"degrading",detail:"PROD: 3 open incidents (SLI fast burn rate) + 19 SLO alert bugs (11 open, 8 closed/dup). SNOW: 6 open auto-incidents (listFiles, updateDefaultBranch, versionId mismatch, estimateResourceCapacity, getSecretSafe). Systemic availability issues across clone_repo, fetch_repo, list_branches. DS cluster disk usage elevated."},
-  {component:"DCM",incidents30d:0,sloAlerts30d:0,sev12_30d:21,support30d:1,incidents14d:0,sloAlerts14d:0,sev12_14d:21,support14d:1,health:"red",trend:"degrading",detail:"SNOW: 21 bugs/auto-incidents (12 open, 9 closed) — dominated by 10.13.100 and 10.14.10 test failures (Blocker, Highest, Critical). Jinja2 runner, grant revoke, deployment history DAO errors. 1 support case (GRANT OWNERSHIP, resolved). Multiple in Ready for Deployment."},
-  {component:"Drivers",incidents30d:5,sloAlerts30d:0,sev12_30d:10,support30d:1,incidents14d:3,sloAlerts14d:0,sev12_14d:10,support14d:1,health:"yellow",trend:"stable",detail:"PROD: 5 incidents (all closed, Not a Bug — MessageWriter spikes). SNOW: 10 bugs (7 open, 3 closed): JDBC conscrypt conflict + S3Client leak + V4 NPE, .NET 55% mem regression, PHP benchmark fail, Client Backend SIGSEGV, Go 322% regression (resolved), ODBC bench (resolved). 1 Sev1 support: Python HTTP400 on large PUT (open)."},
+  {component:"SnowGit",incidents30d:3,sloAlerts30d:18,sev12_30d:6,support30d:0,incidents14d:0,sloAlerts14d:8,sev12_14d:6,support14d:0,health:"yellow",trend:"improving",detail:"PROD: 3 incidents — all now Closed. 18 SLO alert bugs (11 open, 7 closed/dup). SNOW: 6 open auto-incidents (listFiles, updateDefaultBranch, versionId mismatch, estimateResourceCapacity, getSecretSafe). SLO alerts remain but all actual incidents resolved."},
+  {component:"DCM",incidents30d:0,sloAlerts30d:0,sev12_30d:24,support30d:1,incidents14d:0,sloAlerts14d:0,sev12_14d:24,support14d:1,health:"red",trend:"degrading",detail:"SNOW: 24 bugs/auto-incidents (13 open, 11 closed) — dominated by 10.13.100 and 10.14.10 test failures (Blocker, Highest, Critical). New: test_create_or_alter_schema Blocker. Jinja2 runner, grant revoke, deployment history DAO errors. 1 support case (GRANT OWNERSHIP, resolved). Multiple in Ready for Deployment."},
+  {component:"Drivers",incidents30d:5,sloAlerts30d:0,sev12_30d:12,support30d:2,incidents14d:3,sloAlerts14d:0,sev12_14d:12,support14d:2,health:"yellow",trend:"stable",detail:"PROD: 5 incidents (all closed, Not a Bug — MessageWriter spikes). SNOW: 12 bugs (8 open, 4 closed): JDBC conscrypt conflict + S3Client leak + V4 NPE, .NET 55% mem regression, Go 12.8% CPU regression, PHP benchmark fail, Client Backend SIGSEGV, Go 322% regression (resolved), ODBC bench (resolved), PHP bench (resolved). 2 support cases: Python HTTP400 Sev1 (open), Go ADBC Critical (in progress)."},
   {component:"SnowCLI",incidents30d:0,sloAlerts30d:0,sev12_30d:1,support30d:0,incidents14d:0,sloAlerts14d:0,sev12_14d:1,support14d:0,health:"yellow",trend:"stable",detail:"SNOW: 1 High bug — CLI rejects empty-string passphrase for encrypted PKCS8 key (Backlog). No PROD incidents."},
   {component:"SnowAPIs / SQL API",incidents30d:0,sloAlerts30d:0,sev12_30d:1,support30d:1,incidents14d:0,sloAlerts14d:0,sev12_14d:1,support14d:1,health:"yellow",trend:"stable",detail:"SNOW: 1 High support case — STATEMENT_TIMEOUT_IN_SECONDS not enforced when SQL REST API sets session value to 0 (Backlog)."},
   {component:"Terraform Provider",incidents30d:0,sloAlerts30d:0,sev12_30d:0,support30d:0,incidents14d:0,sloAlerts14d:0,sev12_14d:0,support14d:0,health:"green",trend:"stable",detail:"No incidents, bugs, or support cases."},
@@ -317,11 +330,11 @@ const componentHealth = [
 ];
 
 const actionItems = [
-  {component:"SnowGit",risk:"high",text:"3 open PROD incidents + 11 open SLO alert bugs across clone_repo, fetch_repo, list_branches availability. Recurring since mid-March. DS disk usage elevated. 6 open SNOW auto-incidents. Needs root cause investigation."},
-  {component:"DCM",risk:"high",text:"Wave of test failures on 10.13.100 and 10.14.10 — Blocker + Highest priority. Active auto-incidents (Jinja2, grant revoke, deployment history). Several in Ready for Deployment."},
+  {component:"DCM",risk:"high",text:"13 open bugs/auto-incidents on 10.13.100 and 10.14.10 — includes Blocker + Highest priority. New Blocker: test_create_or_alter_schema failure. Active auto-incidents (Jinja2, grant revoke, deployment history). Several in Ready for Deployment."},
+  {component:"SnowGit",risk:"medium",text:"All 3 PROD incidents now Closed. 11 open SLO alert bugs remain (burn rate violations). 6 open SNOW auto-incidents. SLO pattern persistent but incidents are being resolved."},
+  {component:"Drivers — Go",risk:"high",text:"New Critical support case: PowerBi ADBC Go errors executing SQL Stored Procedure (SNOW-3378171, In Progress). Plus 12.8% CPU regression."},
   {component:"Drivers — Python",risk:"high",text:"Sev1 (PatchCritical): HTTP400/RequestTimeout on large file PUT to S3 stage (SNOW-3342254). Waiting for support."},
   {component:"Drivers — JDBC",risk:"medium",text:"3 open High bugs: conscrypt classpath conflict (4.0.2), S3Client ThreadPool leak, V4 NPE. All Backlog."},
-  {component:"Drivers — .NET",risk:"medium",text:"55% memory regression in DOTNET_PERF_TESTS (SNOW-3372661). Backlog."},
   {component:"Alerting",risk:"medium",text:"Real-time alerting incomplete for Drivers, SnowCLI, SQL Alchemy, Terraform Provider. DCM planned for Q2."}
 ];
 // ===== STATE =====
