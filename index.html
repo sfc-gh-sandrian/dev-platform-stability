@@ -196,11 +196,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <h2 class="section-title">Action Items &amp; Risks</h2>
 <div class="action-list" id="actionList"></div>
 
-<div class="footer">Generated on April 14, 2026 at 15:50 · Data sourced from Jira REST API (SNOW + PROD projects)</div>
+<div class="footer">Generated on April 14, 2026 at 18:46 · Data sourced from Jira REST API (SNOW + PROD projects)</div>
 </div>
 
 <script>
-// ===== DATA (sourced from Jira REST API, April 14, 2026 15:50) =====
+// ===== DATA (sourced from Jira REST API, April 14, 2026 18:46) =====
 // Developer Platform components: Drivers, SnowCLI, SnowGit, DCM, SnowAPIs, Terraform Provider, SQL Alchemy
 // PROD: 8 incidents + 18 SLO bugs | SNOW: 100 bugs | 8 support cases
 
@@ -300,10 +300,10 @@ const prodSloAlerts = [
     "ticket": "PROD-513468",
     "component": "SnowGit",
     "summary": "[MEDIUM] snowgit:snowgit_clone_repo_availability:availability SLI exceeding slow burn rate (ie)",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-13",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -311,10 +311,10 @@ const prodSloAlerts = [
     "ticket": "PROD-512784",
     "component": "SnowGit",
     "summary": "[MEDIUM] All instances in DS cluster have elevated disk usage (DS_DEFAULT)",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-10",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -322,10 +322,10 @@ const prodSloAlerts = [
     "ticket": "PROD-509371",
     "component": "SnowGit",
     "summary": "SLO violation: Developer Platform - snowgit_fetch_repo_availability at deployments [awsuswest2prepro",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-03",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -333,10 +333,10 @@ const prodSloAlerts = [
     "ticket": "PROD-509370",
     "component": "SnowGit",
     "summary": "SLO violation: Developer Platform - snowgit_list_branches_availability at deployments [awsuswest2pre",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-03",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -344,10 +344,10 @@ const prodSloAlerts = [
     "ticket": "PROD-509183",
     "component": "SnowGit",
     "summary": "[HIGH] snowgit:snowgit_fetch_repo_availability:availability SLI exceeding fast burn rate (awsuswest2",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-03",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -355,10 +355,10 @@ const prodSloAlerts = [
     "ticket": "PROD-509179",
     "component": "SnowGit",
     "summary": "[MEDIUM] snowgit:snowgit_fetch_repo_availability:availability SLI exceeding slow burn rate (awsuswes",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-03",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -366,10 +366,10 @@ const prodSloAlerts = [
     "ticket": "PROD-509125",
     "component": "SnowGit",
     "summary": "[HIGH] snowgit:snowgit_list_branches_availability:availability SLI exceeding fast burn rate (awsuswe",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-03",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -377,10 +377,10 @@ const prodSloAlerts = [
     "ticket": "PROD-509124",
     "component": "SnowGit",
     "summary": "[MEDIUM] snowgit:snowgit_list_branches_availability:availability SLI exceeding slow burn rate (awsus",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-04-03",
     "period": "14d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -388,10 +388,10 @@ const prodSloAlerts = [
     "ticket": "PROD-506472",
     "component": "SnowGit",
     "summary": "Alert 'SnowGit DS operation queue is high and increasing' has been in 'TEST' for too long",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-03-26",
     "period": "30d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -410,10 +410,10 @@ const prodSloAlerts = [
     "ticket": "PROD-506215",
     "component": "SnowGit",
     "summary": "[MEDIUM] snowgit:snowgit_clone_repo_availability:availability SLI exceeding slow burn rate (azswitze",
-    "status": "Not Started",
+    "status": "Closed",
     "created": "2026-03-26",
     "period": "30d",
-    "context": false,
+    "context": true,
     "issueType": "Bug",
     "priority": "Medium"
   },
@@ -498,6 +498,17 @@ const prodSloAlerts = [
 
 const sevBugs = [
   {
+    "ticket": "SNOW-3379021",
+    "component": "Python Driver",
+    "summary": "Mistaken regex in cursor.py",
+    "status": "Backlog",
+    "created": "2026-04-14",
+    "period": "14d",
+    "context": false,
+    "severity": "High",
+    "type": "Bug"
+  },
+  {
     "ticket": "SNOW-3378171",
     "component": "Go Driver",
     "summary": "Collab - PowerBi ADBC Go- Errors while executing Snowflake SQL Stored Procedure returning table()",
@@ -520,17 +531,6 @@ const sevBugs = [
     "type": "Bug"
   },
   {
-    "ticket": "SNOW-3376470",
-    "component": "DCM",
-    "summary": "[10.14.10 Test Failure] database_change_management.t_create_or_alter_schema.test_create_or_alter_sch",
-    "status": "Backlog",
-    "created": "2026-04-13",
-    "period": "14d",
-    "context": false,
-    "severity": "Blocker",
-    "type": "Bug"
-  },
-  {
     "ticket": "SNOW-3372661",
     "component": ".Net Driver",
     "summary": "PERF REGRESSION: 55.58% in rss-memory-usage-MB (max) benchmark: DOTNET_PERF_TESTS_RESOURCES ",
@@ -545,7 +545,7 @@ const sevBugs = [
     "ticket": "SNOW-3371939",
     "component": "DCM",
     "summary": "[10.14.10 Test Failure] com.snowflake.sql.execution.dcm.project.analyze.ProjectAnalyzerErrorsTestIT:",
-    "status": "Backlog",
+    "status": "IN PROGRESS",
     "created": "2026-04-13",
     "period": "14d",
     "context": false,
@@ -556,7 +556,7 @@ const sevBugs = [
     "ticket": "SNOW-3371938",
     "component": "DCM",
     "summary": "[10.14.10 Test Failure] com.snowflake.sql.execution.dcm.project.analyze.ProjectAnalyzerErrorsTestIT:",
-    "status": "Backlog",
+    "status": "IN PROGRESS",
     "created": "2026-04-13",
     "period": "14d",
     "context": false,
@@ -1754,35 +1754,35 @@ const componentHealth = [
     "component": "SnowGit",
     "health": "yellow",
     "trend": "improving",
-    "detail": ""
+    "detail": "14 open, 21 closed/done. Open by status: 13 Open, 1 Backlog. By priority: 14 High. By type: 13 Auto-incident, 1 Bug. Top open: SNOW-3360838 (Open) | SNOW-3360753 (Open) | SNOW-3356537 (Open) | SNOW-3355647 (Open) | SNOW-3350176 (Open)"
   },
   {
     "incidents30d": 0,
     "sloAlerts30d": 0,
-    "sev12_30d": 47,
+    "sev12_30d": 46,
     "support30d": 0,
     "incidents14d": 0,
     "sloAlerts14d": 0,
-    "sev12_14d": 46,
+    "sev12_14d": 45,
     "support14d": 0,
     "component": "DCM",
     "health": "red",
     "trend": "degrading",
-    "detail": ""
+    "detail": "29 open, 17 closed/done. Open by status: 13 Backlog, 7 Ready for Deployment, 5 Open, 3 IN PROGRESS, 1 In Review. By priority: 15 High, 12 Critical, 2 Highest. By type: 20 Bug, 9 Auto-incident. Top open: SNOW-3371939 (IN PROGRESS) | SNOW-3371938 (IN PROGRESS) | SNOW-3370114 (Open) | SNOW-3363417 (Open) | SNOW-3362315 (Open)"
   },
   {
     "incidents30d": 5,
     "sloAlerts30d": 0,
-    "sev12_30d": 30,
+    "sev12_30d": 31,
     "support30d": 3,
     "incidents14d": 3,
     "sloAlerts14d": 0,
-    "sev12_14d": 26,
+    "sev12_14d": 27,
     "support14d": 3,
     "component": "Drivers",
     "health": "red",
     "trend": "degrading",
-    "detail": ""
+    "detail": "17 open, 19 closed/done. Open by status: 10 Backlog, 2 Open, 2 Ready for Deployment, 1 IN PROGRESS, 1 WAITING FOR SUPPORT, 1 In Review. By priority: 11 High, 5 Critical, 1 PatchCritical. By type: 12 Bug, 3 Support, 2 Auto-incident. Top open: SNOW-3379021 (Backlog) | SNOW-3378171 (IN PROGRESS) | SNOW-3377229 (Backlog) | SNOW-3372661 (Backlog) | SNOW-3365508 (Backlog)"
   },
   {
     "incidents30d": 0,
@@ -1796,7 +1796,7 @@ const componentHealth = [
     "component": "SnowCLI",
     "health": "yellow",
     "trend": "stable",
-    "detail": ""
+    "detail": "4 open, 1 closed/done. Open by status: 2 Backlog, 1 IN PROGRESS, 1 Open. By priority: 4 High. By type: 3 Bug, 1 Auto-incident. Top open: SNOW-3349955 (Backlog) | SNOW-3332553 (IN PROGRESS) | SNOW-3317601 (Backlog) | SNOW-3316060 (Open)"
   },
   {
     "incidents30d": 0,
@@ -1810,7 +1810,7 @@ const componentHealth = [
     "component": "SnowAPIs / SQL API",
     "health": "yellow",
     "trend": "stable",
-    "detail": ""
+    "detail": "1 open, 1 closed/done. Open by status: 1 Backlog. By priority: 1 High. By type: 1 Support. Top open: SNOW-3364213 (Backlog)"
   },
   {
     "incidents30d": 0,
@@ -1824,7 +1824,7 @@ const componentHealth = [
     "component": "Terraform Provider",
     "health": "green",
     "trend": "stable",
-    "detail": ""
+    "detail": "No incidents, bugs, or support cases in the reporting period."
   },
   {
     "incidents30d": 0,
@@ -1838,7 +1838,7 @@ const componentHealth = [
     "component": "SQL Alchemy",
     "health": "green",
     "trend": "stable",
-    "detail": ""
+    "detail": "No incidents, bugs, or support cases in the reporting period."
   }
 ];
 
@@ -1846,7 +1846,7 @@ const actionItems = [
   {
     "component": "DCM",
     "risk": "high",
-    "text": "30 open bugs/auto-incidents on 10.13/10.14. Includes Blocker + Highest. Active auto-incidents (Jinja2, grant revoke, deployment history)."
+    "text": "29 open bugs/auto-incidents on 10.13/10.14. Includes Blocker + Highest. Active auto-incidents (Jinja2, grant revoke, deployment history)."
   },
   {
     "component": "SnowGit",
@@ -1856,7 +1856,7 @@ const actionItems = [
   {
     "component": "Drivers",
     "risk": "high",
-    "text": "16 open bugs/support cases. Sev1 Python HTTP400 (waiting). Critical Go ADBC support case (in progress)."
+    "text": "17 open bugs/support cases. Sev1 Python HTTP400 (waiting). Critical Go ADBC support case (in progress)."
   },
   {
     "component": "Alerting",
